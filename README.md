@@ -1,19 +1,28 @@
-# GA4 Funnel and Attribution Analysis: Where Revenue Is Actually Lost
+# E-Commerce Checkout Friction & Marketing Attribution
+<p align="center">
+  <a href=https://datastudio.google.com/reporting/03d92539-57f4-462f-a22a-b42da8674bfe>
+    <img src="https://img.shields.io/badge/View%20Live%20Dashboard-Looker%20Studio-4285F4?style=for-the-badge&logo=looker&logoColor=white" />
+  </a>
+  <a href=https://medium.com/@gabrielblessing381/e-commerce-checkout-friction-marketing-attribution-738051b32d62?sharedUserId=gabrielblessing381>
+    <img src="https://img.shields.io/badge/Read%20Full%20Article-Medium-000000?style=for-the-badge&logo=medium&logoColor=white" />
+  </a>
+</p>
 
-📄 **Full narrative write-up:** [Read on Medium](#) — this README is the condensed, structured version. Go there for the complete story, reasoning, and validation process.
+# The Problem Statement
 
----
+The online store is losing significant revenue because too many potential customers drop off right before checkout, while broken data tracking makes it impossible to see which marketing channels actually drive sales.
 
-## 1. Business Overview
+## Project Scope & Objectives
 
-Less than 1% of website sessions end in a purchase. This project investigates two connected business questions using real, anonymized session data from Google's public GA4 e-commerce dataset (Google Merchandise Store, January 2021) on BigQuery:
+Using real, anonymized session data from Google’s public GA4 dataset on BigQuery, this project focuses on two high-impact goals:
 
-1. **Where** in the customer journey is revenue actually being lost?
-2. **How much** of the marketing attribution data used for budget decisions can be trusted?
+Recover Lost Revenue: Locate exactly where high-intent shoppers are dropping off before checkout to unlock trapped sales.
+Stop Wasted Marketing Spend: Audit the tracking infrastructure to find out which traffic data can be trusted for profitable business decisions.
+
 
 **Stakeholder relevance:** Growth/UX teams need to know where to focus conversion efforts. Marketing teams need to know whether their channel-performance data is reliable enough to act on.
 
----
+
 
 ## 2. Data Structure
 
@@ -34,7 +43,7 @@ Less than 1% of website sessions end in a purchase. This project investigates tw
 
 Full CTE-by-CTE breakdown with code: [`/sql/funnel_attribution.sql`](./sql/funnel_attribution.sql) · Full technical reasoning: [Medium article](#)
 
----
+
 
 ## 3. Executive Summary
 
@@ -45,11 +54,11 @@ Full CTE-by-CTE breakdown with code: [`/sql/funnel_attribution.sql`](./sql/funne
 | Checkout completion rate | 74.1% |
 | Attribution coverage | 8% (92% of sessions unattributed) |
 
-Out of every 100 sessions, fewer than 1 results in a purchase. The steepest drop happens early, before most sessions reach a product view — but the more actionable leak is deeper in the funnel: **two-thirds of users who add an item to their cart abandon before checkout starts**, even though checkout itself converts above 70% once begun. The leak isn't checkout — it's whatever happens right before it.
+Out of every 100 sessions, fewer than 1 results in a purchase. The steepest drop happens early, before most sessions reach a product view but the more actionable leak is deeper in the funnel: **two-thirds of users who add an item to their cart abandon before checkout starts**, even though checkout itself converts above 70% once begun. The leak isn't checkout — it's whatever happens right before it.
 
 Underneath this, marketing attribution is only possible for a small fraction of sessions. The remaining 92% carry no traffic-source data at all, meaning most channel-level budget decisions would be made blind.
 
----
+
 
 ## 4. Insight Deep Dive
 
@@ -80,10 +89,5 @@ Full validation methodology and root-cause testing: [Medium article](#)
 4. **Treat the 81% top-of-funnel drop as unresolved** — rule out tracking/bot issues before acting on it.
 5. **Re-run channel-level breakdowns on a longer date range** before trusting small-sample channels (e.g., Paid Search: 2 of 18 purchasers).
 
----
-
-## Dashboard & Reproduction
-
-- **Live dashboard:** [Looker Studio link](#)
 - **SQL:** [`/sql/funnel_attribution.sql`](./sql/funnel_attribution.sql)
 - **Dataset:** `bigquery-public-data.ga4_obfuscated_sample_ecommerce` (BigQuery public, free tier)
