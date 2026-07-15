@@ -8,6 +8,8 @@
   </a>
 </p>
 
+![Dashboard Preview](./ga4_funnel_dashboard.png)
+
 # The Problem Statement
 
 The online store is losing significant revenue because too many potential customers drop off right before checkout, while broken data tracking makes it impossible to see which marketing channels actually drive sales.
